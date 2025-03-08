@@ -38,8 +38,8 @@ public class Player {
 
     private Double xag;
 
-    @Id
-    @Column(name = "team")
+    //@Id
+    //@Column(name = "team")
     private String team;
 
     private String comp;
