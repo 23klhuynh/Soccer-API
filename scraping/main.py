@@ -51,7 +51,16 @@ for row in table_rows:
     for td in td_elements:  
         stat = td.get("data-stat") # Extracting the value of the "data-stat" attribute
         if stat in info: 
-            data.get(info.get(stat)).append(td.text.strip()) # Insert the stat into the data dictionary
+            column_name = info[stat] 
+            text = td.text.strip()
+            if stat == "player" and text in data["Player"]: 
+                break
+            elif stat == "age":
+                data[column_name].append(text[:2])
+            elif stat == "minutes":
+                data[column_name].append(text.replace(",", ""))
+            else:
+                data[column_name].append(text)
 
 df = pd.DataFrame(data) # Converting the data dictionary to a DataFrame
 df.to_csv("stats.csv", index=False) # Creating a CSV file from the DataFrame
