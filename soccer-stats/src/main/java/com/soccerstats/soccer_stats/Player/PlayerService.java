@@ -25,7 +25,7 @@ public class PlayerService {
         return playerRepository
                 .findAll()
                 .stream()
-                .filter(player->teamName.equals(player.getTeam()))
+                .filter(player->teamName.equals(player.getTeamName()))
                 .collect(Collectors.toList());
     }
 
@@ -41,7 +41,7 @@ public class PlayerService {
         return playerRepository
                 .findAll()
                 .stream()
-                .filter(player -> player.getPos().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(player -> player.getPosition().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
@@ -57,7 +57,7 @@ public class PlayerService {
         return playerRepository
                 .findAll()
                 .stream()
-                .filter(player -> team.equals(player.getTeam()) && position.equals(player.getPos()))
+                .filter(player -> team.equals(player.getTeamName()) && position.equals(player.getPosition()))
                 .collect(Collectors.toList());
     }
 
@@ -72,8 +72,8 @@ public class PlayerService {
         if (existingPlayer.isPresent()){
             Player playerToUpdate = existingPlayer.get();
             playerToUpdate.setName(updatedPlayer.getName());
-            playerToUpdate.setTeam(updatedPlayer.getTeam());
-            playerToUpdate.setPos(updatedPlayer.getPos());
+            playerToUpdate.setTeamName(updatedPlayer.getTeamName());
+            playerToUpdate.setPosition(updatedPlayer.getPosition());
             playerToUpdate.setNation(updatedPlayer.getNation());
 
             playerRepository.save(playerToUpdate);
